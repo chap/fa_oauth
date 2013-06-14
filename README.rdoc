@@ -1,0 +1,16 @@
+== Readme
+
+We're actually not doing the full oauth flow, just a simple password exchange for a token.
+- http://opro-demo.herokuapp.com/oauth_docs/password_exchange
+
+For now we only have 1 oauth client (Artful.ly), to create another do something like this in the console:
+>> Opro::Oauth::ClientApp.create_with_user_and_name(User.first, 'Artful.ly')
+
+= Exchange username/password for token:
+
+curl --data "client_id=d45830b3f1233409cf9e659ecb53dadd&client_secret=04bcd560c86d529a7e7d8b5ef26515c7&username=chap&password=monkey" http://localhost:3000/oauth/token
+=> {"access_token":"8f6af69ae9e96721c11acd3b16287808","token_type":"bearer","refresh_token":"c0719a0894115c64236309de90d7d285","expires_in":false}
+
+= Get user info
+curl http://localhost:3000/users/current.json?access_token=96f65939c0fbffd999a08bbf33b32daf
+=> { id: 1, username: "chap", email: "chapambrose@gmail.com" }
