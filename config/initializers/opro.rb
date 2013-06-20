@@ -6,7 +6,7 @@ Opro.setup do |config|
   config.authenticate_user_method { |controller| controller.authenticate_user! }
   config.find_user_for_auth do |controller, params|
     user = User.find_by_username(params[:username])
-    return user.valid_password?(params[:password]) ? user : false
+    user.present? && user.valid_password?(params[:password]) ? user : false
   end
 
   ## Add or Remove Application Permissions
